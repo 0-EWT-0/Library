@@ -65,6 +65,14 @@ namespace Library.Controllers
 
             var result = _userServices.GetById(id);
             return View(result);
-        }   
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var result = _userServices.DeleteUser(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

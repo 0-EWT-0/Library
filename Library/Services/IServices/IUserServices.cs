@@ -12,5 +12,7 @@ namespace Library.Services.IServices
 
         public bool UpdateUser(User request);
 
+        public bool DeleteUser(int id);
+
     }
 }

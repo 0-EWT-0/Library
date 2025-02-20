@@ -55,6 +55,8 @@ namespace Library.Services.Services
             }
         }
 
+
+
         public bool CreateUser(User request)
         {
             try
@@ -71,19 +73,20 @@ namespace Library.Services.Services
                 _context.User.Add(user);
                 var result = _context.SaveChanges();
 
-                if (result > 0 )
+                if (result > 0)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }
-                
+
             }
             catch (Exception ex)
             {
                 throw new Exception("an error has ocurred" + ex.Message);
-                
+
             }
         }
 
@@ -94,9 +97,30 @@ namespace Library.Services.Services
                 User user = _context.User.FirstOrDefault(x => x.Pk_user_id == id);
                 return user;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception("an error has ocurred" + ex.Message);
             }
         }
+
+        public bool DeleteUser(int id)
+        {
+            try
+            {
+                var user = _context.User.FirstOrDefault(x => x.Pk_user_id == id);
+                if (user == null)
+                {
+                    return false; 
+                }
+
+                _context.User.Remove(user);
+                return _context.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error al eliminar el usuario: " + ex.Message);
+            }
         }
+
+    }
 }
