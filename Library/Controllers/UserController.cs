@@ -44,7 +44,7 @@ namespace Library.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+        [HttpPut]
 
         public IActionResult UpdateUser(User request)
         {
@@ -67,11 +67,19 @@ namespace Library.Controllers
             return View(result);
         }
 
-        [HttpGet]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var result = _userServices.DeleteUser(id);
-            return RedirectToAction(nameof(Index));
+            var response = _userServices.DeleteUser(id);
+        
+            if(response != null)
+            {
+                return Json(new { success = true });
+            } else
+            {
+                return Json(new { success = false });
+            }
+                
         }
 
     }

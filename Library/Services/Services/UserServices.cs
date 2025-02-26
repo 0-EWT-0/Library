@@ -103,18 +103,21 @@ namespace Library.Services.Services
             }
         }
 
-        public bool DeleteUser(int id)
+        public User DeleteUser(int id)
         {
             try
             {
+                
                 var user = _context.User.FirstOrDefault(x => x.Pk_user_id == id);
-                if (user == null)
-                {
-                    return false; 
-                }
+                //if (user == null)
+                //{
 
+                //}
+ 
                 _context.User.Remove(user);
-                return _context.SaveChanges() > 0;
+                _context.SaveChanges();
+
+                return user;
             }
             catch (Exception ex)
             {
